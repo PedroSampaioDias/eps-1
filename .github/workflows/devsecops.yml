@@ -1,0 +1,44 @@
+name: DevSecOps
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  security-and-quality:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "poetry"
+
+      - name: Instalar Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Verificar Poetry
+        run: poetry --version
+
+      - name: Configurar venv no projeto
+        run: poetry config virtualenvs.in-project true
+
+      - name: Instalar dependencias
+        run: poetry install --no-interaction --no-root
+
+      - name: Rodar Bandit
+        run: poetry run bandit -r .
+
+      - name: Rodar Ruff
+        run: poetry run ruff check .
+
+      - name: Rodar Safety
+        run: poetry run safety check

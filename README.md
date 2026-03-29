@@ -3,6 +3,7 @@
 
 **Disciplina:** Engenharia de Produto de Software (FGA0316) - 2026.1  
 **Aluno:** Pedro Sampaio Dias Rocha | **Matrícula:** 21/1043745  
+Repositório: https://github.com/PedroSampaioDias/eps-1
 
 ## 1. Configuração do Ambiente (Zero Trust & Isolamento)  
 Conforme as diretrizes de Soberania Técnica, as seguintes configurações foram aplicadas:  
